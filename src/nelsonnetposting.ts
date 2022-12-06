@@ -11,7 +11,9 @@ const client = new Client({
 })
 
 ready(client)
+
 interactionCreate(client)
+
 onMessage(client)
 
 client.login(process.env.nelsonnetpostingtoken)
