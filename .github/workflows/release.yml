@@ -3,8 +3,8 @@ name: release
 on: push
 
 jobs:
-  build:
-    name: Build
+  Push:
+    name: Push to Nelson Net
     runs-on: ubuntu-latest
     steps:
     - name: Checkout the Repo
