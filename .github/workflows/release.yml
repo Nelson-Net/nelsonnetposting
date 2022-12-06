@@ -1,0 +1,17 @@
+name: release
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  release-idk:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: runs bash
+        shell: bash
+        run: |
+          git remote add pogger ssh:nelsonnet@angelo.gq:~/nelsonnetposting-deployment/nelsonnetposting.git
+          git push pogger main
