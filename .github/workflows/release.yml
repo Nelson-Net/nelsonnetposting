@@ -10,5 +10,11 @@ jobs:
       - name: runs bash
         shell: bash
         run: |
-          git remote add pogger ssh://nelsonnetposting@angelo.gq/home/nelsonnetposting/nelsonnetposting-deployment/nelsonnetposting.git
-          git push pogger main
+          git clone git@github.com:Nelson-Net/nelsonnetposting.git
+          cd ~/nelsonnetposting
+          git init
+          git add .
+          git commit -m “pog.”
+          git remote add origin ssh://nelsonnetposting@angelo.gq/home/nelsonnetposting/nelsonnetposting-deployment/nelsonnetposting.git
+          git remote -v
+          git push origin master
