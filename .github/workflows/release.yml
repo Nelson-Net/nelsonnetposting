@@ -26,5 +26,5 @@ jobs:
         git config user.email github-actions@github.com
         git config pull.rebase false
         git remote add prod ssh://nelsonnetposting@angelo.gq/home/nelsonnetposting/nelsonnetposting-deployment/nelsonnetposting.git
-        git pull prod main
+        git pull prod main --allow-unrelated-histories
         git push prod --force
