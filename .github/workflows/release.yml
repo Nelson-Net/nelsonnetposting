@@ -10,5 +10,5 @@ jobs:
       - name: runs bash
         shell: bash
         run: |
-          git remote add pogger ssh://nelsonnet@angelo.gq:~/nelsonnetposting-deployment/nelsonnetposting.git
+          git remote add pogger ssh://nelsonnet@angelo.gq/home/nelsonnet/nelsonnetposting-deployment/nelsonnetposting.git
           git push pogger main
