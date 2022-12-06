@@ -1,0 +1,30 @@
+name: release
+
+on: push
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout the Repo
+      uses: actions/checkout@v3
+    - name: Add SSH key
+      env:
+          SSH_AUTH_SOCK: /tmp/ssh_agent.sock
+      run: |
+          mkdir -p /home/runner/.ssh
+          ssh-keyscan angelo.gq >> /home/runner/.ssh/known_hosts
+          echo "${{ secrets.SECRET_KEY }}" > /home/runner/.ssh/id_rsa
+          chmod 600 /home/runner/.ssh/id_rsa
+          ssh-agent -a $SSH_AUTH_SOCK > /dev/null   
+          ssh-add /home/runner/.ssh/id_rsa
+          
+    - name: Push to Nelson Net
+      run: |
+        git config user.name github-actions
+        git config user.email github-actions@github.com
+        git config pull.rebase false
+        git remote add prod ssh://nelsonnetposting@angelo.gq/home/nelsonnetposting/nelsonnetposting-deployment/nelsonnetposting.git
+        git pull prod main --allow-unrelated-histories
+        git push prod --force
