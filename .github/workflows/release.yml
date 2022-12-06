@@ -7,19 +7,9 @@ jobs:
     name: Build
     runs-on: ubuntu-latest
     steps:
-    - name: Prepare ssh keys
-      uses: shimataro/ssh-key-action@v2
-      with:
-        key: ${{ secrets.SECRET_KEY }}
-        known_hosts: ${{ secrets.KNOWN_HOSTS }}
-
     - name: Checkout the Repo
-      uses: actions/checkout@v2
-      with:
-        ssh-key: ${{ secrets.SECRET_KEY }}
-        fetch-depth: 0
-        ref: master
-    - name: Push to Linode
+      uses: actions/checkout@v3
+    - name: Push to Nelson Net
       run: |
         git config user.name github-actions
         git config user.email github-actions@github.com
