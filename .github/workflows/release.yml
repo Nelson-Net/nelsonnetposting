@@ -9,8 +9,14 @@ jobs:
     steps:
     - name: Checkout the Repo
       uses: actions/checkout@v3
-      with:
-        ssh-key: ${{ secrets.SECRET_KEY }}
+    - name: Add SSH key
+      run: |
+          mkdir -p /home/runner/.ssh
+          ssh-keyscan angelo.gq >> /home/runner/.ssh/known_hosts
+          echo "${{ secrets.SECRET_KEY }}" > /home/runner/.ssh/id_rsa
+          chmod 600 /home/runner/.ssh/id_rsa
+          ssh-add /home/runner/.ssh/id_rsa
+          
     - name: Push to Nelson Net
       run: |
         git config user.name github-actions
