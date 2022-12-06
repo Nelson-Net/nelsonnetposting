@@ -11,7 +11,7 @@ export default (client: Client): void => {
 			}
 		}
 		if (message.author?.id !== client.user?.id) {
-			const random = Math.floor(Math.random() * 100)
+			const random = Math.floor(Math.random() * 500)
 			if (random === 1) {
 				await generateWojak(`"${message.content}"`)
 				await message.channel.send({ files: ['./src/images/final.png'] })
