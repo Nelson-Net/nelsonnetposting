@@ -1,4 +1,4 @@
-import { Client } from 'discord.js'
+import { ActionRowBuilder, ButtonBuilder, ButtonStyle, Client } from 'discord.js'
 import { generateWojak } from '../services/generatewojak'
 
 export default (client: Client): void => {
@@ -7,7 +7,10 @@ export default (client: Client): void => {
 			if (message.content === 'wojak') {
 				const repliedMessage = await message.channel.messages.fetch(message.reference?.messageId as string)
 				await generateWojak(`"${repliedMessage.content}"`)
-				await message.channel.send({ files: ['./src/images/final.png'] })
+				const row = new ActionRowBuilder<ButtonBuilder>().addComponents(
+				new ButtonBuilder().setCustomId('reroll').setLabel("Reroll!").setStyle(ButtonStyle.Success)
+				)
+				await repliedMessage.reply({ files: ['./src/images/final.png'], components: [row] })
 			}
 		}
 		if (message.author?.id !== client.user?.id) {
