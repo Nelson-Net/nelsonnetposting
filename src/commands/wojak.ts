@@ -1,4 +1,4 @@
-import { ActionRowBuilder, ButtonBuilder, ButtonStyle, Client } from 'discord.js'
+import { Client } from 'discord.js'
 import { generateWojak } from '../services/generatewojak'
 import { ChatCommand } from '../command'
 
@@ -15,9 +15,6 @@ export const Wojak: ChatCommand = {
 	],
 	run: async (client: Client, interaction) => {
 		await generateWojak(`"${interaction.options._hoistedOptions[0].value}"`)
-		const row = new ActionRowBuilder<ButtonBuilder>().addComponents(
-			new ButtonBuilder().setCustomId('reroll').setLabel("Reroll!").setStyle(ButtonStyle.Success)
-			)
-			await interaction.followUp({ files: ['./src/images/final.png'], components: [row] })
+		await interaction.followUp({ files: ['./src/images/final.png'] })
 	},
 }
